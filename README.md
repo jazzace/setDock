@@ -22,3 +22,6 @@ Read more here https://appleshare.it/posts/use-dockutil-in-a-script/
 **Requirements**
 dockutil Version 3.0.0 or higher installed to /usr/local/bin/
 _source `dockutil` https://github.com/kcrawford/dockutil/_
+
+## About This Fork
+This repo has an enhanced version of setDock-defaultDock that allows you to leverage more dockutil features. How to use the script is documented internally.
