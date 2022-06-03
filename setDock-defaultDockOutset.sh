@@ -28,14 +28,17 @@
 # • "optionalItems" (which can be Apps or Others) are only added if present.
 # • You are allowed to specify dockutil options for alwaysOthers (in the optionsOthers 
 #   list) and optionalItems (in the optionsOptional list).
+# • You must run the script while a user is logged in (e.g., using Outset 
+#   https://github.com/chilcote/outset). Root privileges are not required.
 #
-# This version of the script requires root privileges. Use setDock-defaultDockOutset.sh if
-# you want to run it the user space with user permissions, such as with a tool like Outset.
+# Use setDock-defaultDock.sh instead if you need to run this script as root 
+# (e.g., executed as part of a Jamf Pro policy).
 #
 # Source for this fork/version:
-# https://github.com/jazzace/setDock/blob/main/setDock-defaultDock.sh
+# https://github.com/jazzace/setDock/blob/main/setDock-defaultDockOutset.sh
 #
 # Code last edited 2022-06-03
+# (values of the 5 arrays may change without notice here, as this is my production version)
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -47,12 +50,22 @@ alwaysApps=(
 "/System/Applications/Launchpad.app"
 "/System/Applications/Mission Control.app"
 "/Applications/Safari.app"
+"/Applications/Firefox.app"
 "/Applications/Pages.app"
-"/Applications/Numbers.app"
-"/Applications/Keynote.app"
+"/Applications/Microsoft Word.app"
+"/Applications/Adobe Photoshop 2022/Adobe Photoshop 2022.app"
+"/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app"
+"/Applications/Adobe Bridge 2022/Adobe Bridge 2022.app"
+"/Applications/Adobe Illustrator 2022/Adobe Illustrator.app"
+"/Applications/Blender.app"
+"/Applications/Adobe Premiere Pro 2022/Adobe Premiere Pro 2022.app"
 "/Applications/iMovie.app"
-"/Applications/GarageBand.app"
 "/System/Applications/System Preferences.app"
+"/Applications/Keynote.app"
+"/Applications/Microsoft PowerPoint.app"
+"/Applications/GarageBand.app"
+"/Applications/Amadeus Pro.app"
+"/Applications/Audacity.app"
 )
 
 # Path to folders and files for the right side of the Dock ("others"); ~/ syntax may be used.
@@ -61,6 +74,7 @@ alwaysApps=(
 # first line of optionsOthers).
 alwaysOthers=(
 "/Applications"
+"/Applications/Utilities/Connect"
 "~/Downloads"
 )
 
@@ -69,20 +83,26 @@ alwaysOthers=(
 # For files, use a pair of quotes (null string) since there are no display options.
 optionsOthers=(
 "--view grid --display folder --sort name"
+"--view grid --display folder --sort name"
 "--view list --display folder --sort dateadded"
 )
 
 # Path to items to add to the Dock (apps, folders, files) only if they are present.
 # This list pairs with optionsOptional to specify how you would like these items to be displayed.
 optionalItems=(
-"/Applications/Google Chrome.app"
-"/Applications/Microsoft Word.app"
-"/Applications/Microsoft Excel.app"
-"/Applications/Microsoft PowerPoint.app"
+"/Applications/PTGui.app"
+"/Applications/Pano2VR.app"
+"/Applications/Panotour Pro 2.5.app"
+"/Applications/Epson Software/Epson Scan 2.app"
+"/Applications/Lightwright 6.app"
+"/Applications/ClipGrab.app"
+"/Applications/IINA.app"
 "/Applications/Final Cut Pro.app"
 "/Applications/Logic Pro X.app"
-"/Applications/Motion.app"
-"/Applications/Remote Desktop.app"
+"/Applications/Ableton Live 11 Suite.app"
+"/Applications/ZBrush 2022 FL/ZBrush.app"
+"/Applications/Vectorworks 2022/Vectorworks 2022.app"
+"/Applications/Max.app"
 )
 
 # Display options for items in optionalItems in order.
@@ -96,14 +116,19 @@ optionalItems=(
 # Any relative options (e.g., --before, --after) will be applied to the Dock in the State
 # it was in after the "always" apps and others are applied
 optionsOptional=(
-"--after Safari"
-"--after Pages"
-"--after Numbers"
-"--after Keynote"
+""
+""
+""
+""
+"--after 'Adobe Illustrator'"
+"--before 'System Preferences'"
+"--before 'System Preferences'"
 "--replacing iMovie"
 "--replacing GarageBand"
-"--before 'System Preferences'"
-""
+"--before 'Amadeus Pro'"
+"--before Blender"
+"--after 'Adobe Illustrator'"
+"--before 'Microsoft PowerPoint'"
 )
 
 ###############################################################
@@ -122,17 +147,6 @@ userHome=$(dscl . -read /users/${currentUser} NFSHomeDirectory | cut -d " " -f 2
 # Path to plist
 plist="${userHome}/Library/Preferences/com.apple.dock.plist"
 
-# Convenience function to run a command as the current user
-# usage: runAsUser command arguments...
-runAsUser() {  
-	if [[ "${currentUser}" != "loginwindow" ]]; then
-		launchctl asuser "$uid" sudo -u "${currentUser}" "$@"
-	else
-		echo "no user logged in"
-		exit 1
-	fi
-}
-
 # Check if dockutil is installed
 if [[ -x "/usr/local/bin/dockutil" ]]; then
     dockutil="/usr/local/bin/dockutil"
@@ -146,13 +160,13 @@ dockutilVersion=$(${dockutil} --version)
 echo "Dockutil version = ${dockutilVersion}"
 
 # Create a clean Dock
-runAsUser "${dockutil}" --remove all --no-restart ${plist}
+"${dockutil}" --remove all --no-restart ${plist}
 echo "All items removed from user’s Dock"
 
 # Loop through alwaysApps and add item to the Dock. Log (only) if app is missing.
 for app in "${alwaysApps[@]}"; 
 do
-	runAsUser "${dockutil}" --add "${app}" --no-restart ${plist};
+	"${dockutil}" --add "${app}" --no-restart ${plist};
 	if [[ ! -e "${app}" ]]; then
 		echo "${app} not installed but Dock item added"
     fi
@@ -174,7 +188,7 @@ fi
 
 for (( i=0 ; i<itemCount ; i++)); 
 do
-	eval runAsUser "${dockutil}" --add \"${alwaysOthers[i]}\" ${optionsOthers[i]} --no-restart ${plist};
+	eval "${dockutil}" --add \"${alwaysOthers[i]}\" ${optionsOthers[i]} --no-restart ${plist};
 	if [[ ! -e "${alwaysOthers[i]}" ]] && [[ "${alwaysOthers[i]:0:1}" != '~' ]] ; then
 		echo "${alwaysOthers[i]} not present but Dock item added"
     fi
@@ -193,7 +207,7 @@ fi
 for (( i=0 ; i<itemCount ; i++)); 
 do
 	if [[ -e "${optionalItems[i]}" ]]; then
-		eval runAsUser "${dockutil}" --add \"${optionalItems[i]}\" ${optionsOptional[i]} --no-restart ${plist};
+		eval "${dockutil}" --add \"${optionalItems[i]}\" ${optionsOptional[i]} --no-restart ${plist};
 	else
 		echo "${optionalItems[i]} not present and no Dock item added"
     fi
