@@ -90,9 +90,6 @@ optionsOthers=(
 # Path to items to add to the Dock (apps, folders, files) only if they are present.
 # This list pairs with optionsOptional to specify how you would like these items to be displayed.
 optionalItems=(
-"/Applications/PTGui.app"
-"/Applications/Pano2VR.app"
-"/Applications/Panotour Pro 2.5.app"
 "/Applications/Epson Software/Epson Scan 2.app"
 "/Applications/Lightwright 6.app"
 "/Applications/ClipGrab.app"
@@ -103,6 +100,8 @@ optionalItems=(
 "/Applications/ZBrush 2022 FL/ZBrush.app"
 "/Applications/Vectorworks 2022/Vectorworks 2022.app"
 "/Applications/Max.app"
+"/Applications/CLO_Network_OnlineAuth.app"
+"/Applications/KeyShot11.app"
 )
 
 # Display options for items in optionalItems in order.
@@ -117,9 +116,6 @@ optionalItems=(
 # it was in after the "always" apps and others are applied
 optionsOptional=(
 ""
-""
-""
-""
 "--after 'Adobe Illustrator'"
 "--before 'System Preferences'"
 "--before 'System Preferences'"
@@ -129,6 +125,8 @@ optionsOptional=(
 "--before Blender"
 "--after 'Adobe Illustrator'"
 "--before 'Microsoft PowerPoint'"
+""
+"--before Blender"
 )
 
 ###############################################################
