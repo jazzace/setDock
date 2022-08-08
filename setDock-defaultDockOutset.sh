@@ -74,7 +74,7 @@ alwaysApps=(
 # first line of optionsOthers).
 alwaysOthers=(
 "/Applications"
-"/Applications/Utilities/Connect"
+"/Applications/Utilities/IAML Utilities"
 "~/Downloads"
 )
 
