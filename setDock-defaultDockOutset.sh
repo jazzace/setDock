@@ -92,15 +92,12 @@ optionsOthers=(
 optionalItems=(
 "/Applications/Epson Software/Epson Scan 2.app"
 "/Applications/Lightwright 6.app"
-"/Applications/ClipGrab.app"
-"/Applications/IINA.app"
 "/Applications/Final Cut Pro.app"
 "/Applications/Logic Pro X.app"
 "/Applications/Ableton Live 11 Suite.app"
 "/Applications/ZBrush 2022 FL/ZBrush.app"
 "/Applications/Vectorworks 2022/Vectorworks 2022.app"
 "/Applications/Max.app"
-"/Applications/CLO_Network_OnlineAuth.app"
 "/Applications/KeyShot11.app"
 )
 
@@ -117,15 +114,12 @@ optionalItems=(
 optionsOptional=(
 ""
 "--after 'Adobe Illustrator'"
-"--before 'System Preferences'"
-"--before 'System Preferences'"
 "--replacing iMovie"
 "--replacing GarageBand"
 "--before 'Amadeus Pro'"
 "--before Blender"
 "--after 'Adobe Illustrator'"
 "--before 'Microsoft PowerPoint'"
-""
 "--before Blender"
 )
 
