@@ -51,6 +51,8 @@ optionsOthers=(
 )
 ```
 
-The optionalItems/optionsOptional array pairing works in the same way. You can use any dockutil arguments, so options like `--replacing`, `--before`, and `--after` are common here. Note that dockutil may only see items from alwaysApps for use with relative placement or replacement. If you simply want to add the optional item to the end of the appropriate part of the Dock and not specify any options, you may use an empty string ("") for that item’s options.
+The optionalItems/optionsOptional array pairing works in the same way. You can use any dockutil arguments, so options like `--replacing`, `--before`, and `--after` are common here. Because items in this pair of arrays are only added if they exist, it is very useful for things like System Preferences (macOS Monterey and earlier) versus System Settings (macOS Ventura) or if you only have pro apps on some computers (e.g., add iMovie in the `alwaysApps` and then have Final Cut Pro `--replacing iMovie` in this section).
+
+Note that dockutil may only see items from alwaysApps for use with relative placement or replacement. If you simply want to add the optional item to the end of the appropriate part of the Dock and not specify any options, you may use an empty string (`""`) for that item’s options.
 
 If the paired arrays are unmatched in length, this fact will be logged but execution will proceed. Any item in alwaysOthers or optionalItems that does not have a matching item will proceed as if no dockutil options were specified.
