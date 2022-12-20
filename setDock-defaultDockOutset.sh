@@ -53,12 +53,12 @@ alwaysApps=(
 "/Applications/Firefox.app"
 "/Applications/Pages.app"
 "/Applications/Microsoft Word.app"
-"/Applications/Adobe Photoshop 2022/Adobe Photoshop 2022.app"
+"/Applications/Adobe Photoshop 2023/Adobe Photoshop 2023.app"
 "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app"
-"/Applications/Adobe Bridge 2022/Adobe Bridge 2022.app"
-"/Applications/Adobe Illustrator 2022/Adobe Illustrator.app"
+"/Applications/Adobe Bridge 2023/Adobe Bridge 2023.app"
+"/Applications/Adobe Illustrator 2023/Adobe Illustrator.app"
 "/Applications/Blender.app"
-"/Applications/Adobe Premiere Pro 2022/Adobe Premiere Pro 2022.app"
+"/Applications/Adobe Premiere Pro 2023/Adobe Premiere Pro 2023.app"
 "/Applications/iMovie.app"
 "/System/Applications/System Preferences.app"
 "/Applications/Keynote.app"
@@ -90,15 +90,18 @@ optionsOthers=(
 # Path to items to add to the Dock (apps, folders, files) only if they are present.
 # This list pairs with optionsOptional to specify how you would like these items to be displayed.
 optionalItems=(
+"/System/Applications/System Settings.app"
+"/System/Cryptexes/App/System/Applications/Safari.app"
 "/Applications/Epson Software/Epson Scan 2.app"
 "/Applications/Lightwright 6.app"
 "/Applications/Final Cut Pro.app"
 "/Applications/Logic Pro X.app"
 "/Applications/Ableton Live 11 Suite.app"
 "/Applications/ZBrush 2022 FL/ZBrush.app"
-"/Applications/Vectorworks 2022/Vectorworks 2022.app"
+"/Applications/Vectorworks 2023/Vectorworks 2023.app"
 "/Applications/Max.app"
 "/Applications/KeyShot11.app"
+"/Users/Shared/ST-DBLauncher.fmp12"
 )
 
 # Display options for items in optionalItems in order.
@@ -112,7 +115,8 @@ optionalItems=(
 # Any relative options (e.g., --before, --after) will be applied to the Dock in the State
 # it was in after the "always" apps and others are applied
 optionsOptional=(
-""
+"--replacing 'System Preferences'"
+"--replacing Safari"
 "--after 'Adobe Illustrator'"
 "--replacing iMovie"
 "--replacing GarageBand"
@@ -121,6 +125,7 @@ optionsOptional=(
 "--after 'Adobe Illustrator'"
 "--before 'Microsoft PowerPoint'"
 "--before Blender"
+""
 )
 
 ###############################################################
