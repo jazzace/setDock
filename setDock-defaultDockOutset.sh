@@ -117,6 +117,7 @@ optionalItems=(
 optionsOptional=(
 "--replacing 'System Preferences'"
 "--replacing Safari"
+""
 "--after 'Adobe Illustrator'"
 "--replacing iMovie"
 "--replacing GarageBand"
