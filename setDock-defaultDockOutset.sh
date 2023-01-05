@@ -101,6 +101,7 @@ optionalItems=(
 "/Applications/Vectorworks 2023/Vectorworks 2023.app"
 "/Applications/Max.app"
 "/Applications/KeyShot11.app"
+"/Applications/DiffusionBee.app"
 "/Users/Shared/ST-DBLauncher.fmp12"
 )
 
@@ -126,6 +127,7 @@ optionsOptional=(
 "--after 'Adobe Illustrator'"
 "--before 'Microsoft PowerPoint'"
 "--before Blender"
+"--after Blender"
 ""
 )
 
