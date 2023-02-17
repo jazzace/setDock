@@ -103,6 +103,7 @@ optionalItems=(
 "/Applications/KeyShot11.app"
 "/Applications/DiffusionBee.app"
 "/Users/Shared/ST-DBLauncher.fmp12"
+"/Applications/ON1 Resize AI 2023/ON1 Resize AI 2023.app"
 )
 
 # Display options for items in optionalItems in order.
@@ -129,6 +130,7 @@ optionsOptional=(
 "--before Blender"
 "--after Blender"
 ""
+"--after 'Adobe Photoshop 2023'"
 )
 
 ###############################################################
