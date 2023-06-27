@@ -49,7 +49,7 @@ export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 alwaysApps=(
 "/System/Applications/Launchpad.app"
 "/System/Applications/Mission Control.app"
-"/Applications/Safari.app"
+"/System/Cryptexes/App/System/Applications/Safari.app"
 "/Applications/Firefox.app"
 "/Applications/Pages.app"
 "/Applications/Microsoft Word.app"
@@ -60,7 +60,7 @@ alwaysApps=(
 "/Applications/Blender.app"
 "/Applications/Adobe Premiere Pro 2023/Adobe Premiere Pro 2023.app"
 "/Applications/iMovie.app"
-"/System/Applications/System Preferences.app"
+"/System/Applications/System Settings.app"
 "/Applications/Keynote.app"
 "/Applications/Microsoft PowerPoint.app"
 "/Applications/GarageBand.app"
@@ -90,9 +90,11 @@ optionsOthers=(
 # Path to items to add to the Dock (apps, folders, files) only if they are present.
 # This list pairs with optionsOptional to specify how you would like these items to be displayed.
 optionalItems=(
-"/System/Applications/System Settings.app"
-"/System/Cryptexes/App/System/Applications/Safari.app"
+"/System/Applications/System Preferences.app"
 "/Applications/Epson Software/Epson Scan 2.app"
+"/Applications/SilverFast Application/SilverFast 9/SilverFast 9.app"
+"/Applications/SilverFast Application/SilverFast 8/SilverFast 8.app"
+"/Applications/VueScan.app"
 "/Applications/Lightwright 6.app"
 "/Applications/Final Cut Pro.app"
 "/Applications/Logic Pro X.app"
@@ -101,7 +103,6 @@ optionalItems=(
 "/Applications/Vectorworks 2023/Vectorworks 2023.app"
 "/Applications/Max.app"
 "/Applications/KeyShot11.app"
-"/Applications/DiffusionBee.app"
 "/Users/Shared/ST-DBLauncher.fmp12"
 "/Applications/ON1 Resize AI 2023/ON1 Resize AI 2023.app"
 )
@@ -117,8 +118,10 @@ optionalItems=(
 # Any relative options (e.g., --before, --after) will be applied to the Dock in the State
 # it was in after the "always" apps and others are applied
 optionsOptional=(
-"--replacing 'System Preferences'"
-"--replacing Safari"
+"--replacing 'System Settings'"
+""
+""
+""
 ""
 "--after 'Adobe Illustrator'"
 "--replacing iMovie"
@@ -128,7 +131,6 @@ optionsOptional=(
 "--after 'Adobe Illustrator'"
 "--before 'Microsoft PowerPoint'"
 "--before Blender"
-"--after Blender"
 ""
 "--after 'Adobe Photoshop 2023'"
 )
