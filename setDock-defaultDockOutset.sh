@@ -29,7 +29,7 @@
 # • You are allowed to specify dockutil options for alwaysOthers (in the optionsOthers 
 #   list) and optionalItems (in the optionsOptional list).
 # • You must run the script while a user is logged in (e.g., using Outset 
-#   https://github.com/chilcote/outset). Root privileges are not required.
+#   https://github.com/macadmins/outset). Root privileges are not required.
 #
 # Use setDock-defaultDock.sh instead if you need to run this script as root 
 # (e.g., executed as part of a Jamf Pro policy).
@@ -57,15 +57,15 @@ alwaysApps=(
 "/Applications/Adobe Photoshop 2024/Adobe Photoshop 2024.app"
 "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app"
 "/Applications/Adobe Bridge 2024/Adobe Bridge 2024.app"
-"/Applications/Draw Things.app"
 "/Applications/Adobe Illustrator 2024/Adobe Illustrator.app"
-"/Applications/Vectorworks 2023/Vectorworks 2023.app"
+"/Applications/ZBrush 2022 FL/ZBrush.app"
+"/Applications/Vectorworks 2024/Vectorworks 2024.app"
 "/Applications/Adobe Premiere Pro 2024/Adobe Premiere Pro 2024.app"
 "/Applications/iMovie.app"
-"/Applications/ClipGrab.app"
 "/System/Applications/System Settings.app"
 "/Applications/Keynote.app"
 "/Applications/Microsoft PowerPoint.app"
+"/Applications/Max.app"
 "/Applications/GarageBand.app"
 "/Applications/Amadeus Pro.app"
 "/Applications/Audacity.app"
@@ -101,15 +101,12 @@ optionalItems=(
 "/Applications/Lightwright 6.app"
 "/Applications/Final Cut Pro.app"
 "/Applications/Logic Pro X.app"
-"/Applications/Ableton Live 11 Suite.app"
-"/Applications/ZBrush 2022 FL/ZBrush.app"
+"/Applications/Ableton Live 12 Suite.app"
+"/Applications/Maxon ZBrush 2024/ZBrush.app"
 "/Applications/KeyShot11.app"
-"/Applications/Vectorworks 2024/Vectorworks 2024.app"
-"/Applications/Max.app"
+"/Applications/Vectorworks 2025/Vectorworks 2025.app"
 "/Users/Shared/ST-DBLauncher.fmp12"
 "/Applications/ON1 Resize AI 2023/ON1 Resize AI 2023.app"
-"/Applications/PTGui.app"
-"/Applications/Pano2VR.app"
 )
 
 # Display options for items in optionalItems in order.
@@ -132,14 +129,11 @@ optionsOptional=(
 "--replacing iMovie"
 "--replacing GarageBand"
 "--before 'Amadeus Pro'"
-"--before 'Vectorworks 2023'"
-"--before 'Vectorworks 2023'"
-"--replacing 'Vectorworks 2023'"
-"--before 'Microsoft PowerPoint'"
+"--replacing 'ZBrush'"
+"--before 'Vectorworks 2024'"
+"--replacing 'Vectorworks 2024'"
 ""
 "--after 'Adobe Photoshop 2024'"
-"--after 'Adobe Bridge 2024'"
-"--after 'Adobe Bridge 2024'"
 )
 
 ###############################################################
