@@ -37,7 +37,7 @@
 # Source for this fork/version:
 # https://github.com/jazzace/setDock/blob/main/setDock-defaultDockOutset.sh
 #
-# Code last edited 2022-06-03
+# Code last edited 2024-12-11 (added user-specific dock additions)
 # (values of the 5 arrays may change without notice here, as this is my production version)
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -54,14 +54,17 @@ alwaysApps=(
 "/Applications/Microsoft Edge.app"
 "/Applications/Pages.app"
 "/Applications/Microsoft Word.app"
-"/Applications/Adobe Photoshop 2024/Adobe Photoshop 2024.app"
+"/Applications/Adobe Photoshop 2025/Adobe Photoshop 2025.app"
 "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app"
-"/Applications/Adobe Bridge 2024/Adobe Bridge 2024.app"
-"/Applications/Adobe Illustrator 2024/Adobe Illustrator.app"
-"/Applications/ZBrush 2022 FL/ZBrush.app"
+"/Applications/Adobe Bridge 2025/Adobe Bridge 2025.app"
+"/Applications/Adobe Illustrator 2025/Adobe Illustrator.app"
+"/Applications/Maxon ZBrush 2025/ZBrush.app"
+"/Applications/DiffusionBee.app"
 "/Applications/Vectorworks 2024/Vectorworks 2024.app"
-"/Applications/Adobe Premiere Pro 2024/Adobe Premiere Pro 2024.app"
+"/Applications/Adobe Premiere Pro 2025/Adobe Premiere Pro 2025.app"
 "/Applications/iMovie.app"
+"/Applications/ClipGrab.app"
+"/Applications/IINA.app"
 "/System/Applications/System Settings.app"
 "/Applications/Keynote.app"
 "/Applications/Microsoft PowerPoint.app"
@@ -93,25 +96,31 @@ optionsOthers=(
 # Path to items to add to the Dock (apps, folders, files) only if they are present.
 # This list pairs with optionsOptional to specify how you would like these items to be displayed.
 optionalItems=(
-"/System/Applications/System Preferences.app"
 "/Applications/Epson Software/Epson Scan 2.app"
 "/Applications/SilverFast Application/SilverFast 9/SilverFast 9.app"
 "/Applications/SilverFast Application/SilverFast 8/SilverFast 8.app"
 "/Applications/VueScan.app"
 "/Applications/Lightwright 6.app"
 "/Applications/Final Cut Pro.app"
-"/Applications/Logic Pro X.app"
+"/Applications/Logic Pro.app"
 "/Applications/Ableton Live 12 Suite.app"
-"/Applications/Maxon ZBrush 2024/ZBrush.app"
 "/Applications/KeyShot11.app"
 "/Applications/Vectorworks 2025/Vectorworks 2025.app"
 "/Users/Shared/ST-DBLauncher.fmp12"
 "/Applications/ON1 Resize AI 2023/ON1 Resize AI 2023.app"
+"/Applications/BBEdit.app"
+"/System/Applications/Utilities/Activity Monitor.app"
+"/System/Applications/Utilities/Console.app"
+"/System/Applications/Utilities/Terminal.app"
 )
 
 # Display options for items in optionalItems in order.
 # You should have one entry for each entry in optionalItems.
 # If you do not want to specify options for an item, use a pair of quotes (null string).
+#
+# Instead of specifying an option, you may specify a username. If it matches the 
+# currently logged-in user, the item (assuming it exists) will be added at the end of the
+# user’s Dock. This is useful for adding technical tools to the Dock of an Admin account.
 #
 # You must escape or quote (with a different type of quote mark) any argument that has a
 # space in it (e.g., "--after 'Microsoft Word'" or "--after Microsoft\ Word").
@@ -120,7 +129,6 @@ optionalItems=(
 # Any relative options (e.g., --before, --after) will be applied to the Dock in the State
 # it was in after the "always" apps and others are applied
 optionsOptional=(
-"--replacing 'System Settings'"
 ""
 ""
 ""
@@ -129,11 +137,14 @@ optionsOptional=(
 "--replacing iMovie"
 "--replacing GarageBand"
 "--before 'Amadeus Pro'"
-"--replacing 'ZBrush'"
 "--before 'Vectorworks 2024'"
 "--replacing 'Vectorworks 2024'"
 ""
-"--after 'Adobe Photoshop 2024'"
+"--after 'Adobe Photoshop 2025'"
+"tech"
+"tech"
+"tech"
+"tech"
 )
 
 ###############################################################
@@ -147,7 +158,7 @@ currentUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ { p
 uid=$(id -u "${currentUser}")
 
 # Current User home folder - do it this way in case the folder isn't in /Users
-userHome=$(dscl . -read /users/${currentUser} NFSHomeDirectory | cut -d " " -f 2)
+userHome=$(dscl . -read /users/"${currentUser}" NFSHomeDirectory | cut -d " " -f 2)
 
 # Path to plist
 plist="${userHome}/Library/Preferences/com.apple.dock.plist"
@@ -200,7 +211,7 @@ do
 done
 
 # Loop through optionalItems and check if item is installed. If installed, add to the Dock
-# using the options specified in optionsOptional.
+# using the options (or username) specified in optionsOptional
 itemCount=${#optionalItems[@]}
 optionsCount=${#optionsOptional[@]}
 if [ $itemCount -gt $optionsCount ] ; then
@@ -212,7 +223,12 @@ fi
 for (( i=0 ; i<itemCount ; i++)); 
 do
 	if [[ -e "${optionalItems[i]}" ]]; then
-		eval "${dockutil}" --add \"${optionalItems[i]}\" ${optionsOptional[i]} --no-restart ${plist};
+		optOrUser=${optionsOptional[i]:0:2}
+		if [ "${optOrUser}" == '--' ] || [ "${optOrUser}" == '' ] ; then  # Process option as normal
+			eval "${dockutil}" --add \"${optionalItems[i]}\" ${optionsOptional[i]} --no-restart ${plist}
+		elif [ "${optionsOptional[i]}" == "${currentUser}" ] ; then # Process option as a username and only add to Dock if the current username matches
+			eval "${dockutil}" --add \"${optionalItems[i]}\" --no-restart ${plist}
+		fi
 	else
 		echo "${optionalItems[i]} not present and no Dock item added"
     fi
