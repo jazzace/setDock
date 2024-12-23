@@ -58,7 +58,6 @@ alwaysApps=(
 "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app"
 "/Applications/Adobe Bridge 2025/Adobe Bridge 2025.app"
 "/Applications/Adobe Illustrator 2025/Adobe Illustrator.app"
-"/Applications/Maxon ZBrush 2025/ZBrush.app"
 "/Applications/DiffusionBee.app"
 "/Applications/Vectorworks 2024/Vectorworks 2024.app"
 "/Applications/Adobe Premiere Pro 2025/Adobe Premiere Pro 2025.app"
@@ -96,6 +95,7 @@ optionsOthers=(
 # Path to items to add to the Dock (apps, folders, files) only if they are present.
 # This list pairs with optionsOptional to specify how you would like these items to be displayed.
 optionalItems=(
+"/Applications/Maxon ZBrush 2025/ZBrush.app"
 "/Applications/Epson Software/Epson Scan 2.app"
 "/Applications/SilverFast Application/SilverFast 9/SilverFast 9.app"
 "/Applications/SilverFast Application/SilverFast 8/SilverFast 8.app"
@@ -129,6 +129,7 @@ optionalItems=(
 # Any relative options (e.g., --before, --after) will be applied to the Dock in the State
 # it was in after the "always" apps and others are applied
 optionsOptional=(
+"--after 'Adobe Illustrator'"
 ""
 ""
 ""
